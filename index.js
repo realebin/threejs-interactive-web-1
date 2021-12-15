@@ -26,7 +26,7 @@ gui.add(world.plane, 'heightSegments', 1, 100).onChange(generatePlane)
 // generate the plane
 function generatePlane() {
   planeMesh.geometry.dispose()
-  
+
   // make plane with world.plane values
   planeMesh.geometry = new THREE.PlaneGeometry(
     world.plane.width,
@@ -39,21 +39,32 @@ function generatePlane() {
   const randomValues = [];
 
   // looping the randomize of plane shape
+  // to make it looks like a mountain
   for (let i = 0; i < array.length; i++) {
+
+    // cuz its x y z, so just do it while the counter reach 3
     if (i % 3 === 0) {
       const x = array[i];
       const y = array[i + 1];
       const z = array[i + 2];
+
+      // array[i] is x
       array[i] = x + (Math.random() - 0.5) * 3;
+
+      // array[i+1] is y
       array[i + 1] = y + (Math.random() - 0.5) * 3;
+
+      // and array [i+2] is z
       array[i + 2] = z + (Math.random() - 0.5) * 3;
     }
+
+    // push randomValues while looping
     randomValues.push(Math.random() * Math.PI * 2)
   }
 
   planeMesh.geometry.attributes.position.randomValues =
     randomValues;
-    
+
   planeMesh.geometry.attributes.position.originalPosition =
     planeMesh.geometry.attributes.position.array;
 
